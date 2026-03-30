@@ -1,4 +1,12 @@
 const request = require('supertest')
+
+// Mock the database pool so tests don't need a real Postgres instance
+jest.mock('../config/db', () => ({
+  query: jest.fn(),
+  connect: jest.fn(),
+  on: jest.fn(),
+}))
+
 const app = require('../app')
 
 describe('Health check', () => {
